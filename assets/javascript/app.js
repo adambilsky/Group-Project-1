@@ -45,23 +45,30 @@ var CAArray = [
     }
 
 ]
+var LincolnPark = [];
+
 $.ajax({
     url: "https://data.cityofchicago.org/resource/6zsd-86xi.json",
     type: "GET",
     data: {
-      "$limit" : 5000,
-      "$$app_token" : "chp9vzClkoQ3bf0yZLoCpG21u"
+        "$limit": 5000,
+        "$$app_token": "chp9vzClkoQ3bf0yZLoCpG21u"
     }
-}).done(function(data) {
-  alert("Retrieved " + data.length + " records from the dataset!");
-  for (i=0; i<100; i++) {
-    if (data[i].community_area === 7) {
-        var lpdata = data[i].community_area;
-        console.log(lpdata);
+}).done(function (data) {
+    alert("Retrieved " + data.length + " records from the dataset!");
+    for (i = 0; i < data.length; i++) {
+        if (parseInt(data[i].community_area) === 7) {
+            var lpdata = data[i];
+            // console.log(lpdata);
+            LincolnPark.push(lpdata);
+        }
     }
+    console.log(LincolnPark);
+
+
     // else {
     //     alert("There are no records matching the criteria you have chosen.")
     // }
-  console.log(data);
+    // console.log(data);
 
-}});    
+});    
