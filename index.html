@@ -12,16 +12,33 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/style.css">
-    <title>Start Point</title>
+    <title>Crime Dataset</title>
 </head>
 
 <body>
     <div class="container" style="background-color: rgb(231, 231, 231);">
 
-        <div class="jumbotron jumbotron-fluid p-0 mb-0 mt-2 rounded" style="background-color: rgb(231, 231, 231)">
+        <div class="jumbotron jumbotron-fluid p-0 mb-0 rounded" style="background-color: rgb(231, 231, 231)">
             <div class="container text-center" style=" background-color: rgb(231, 231, 231) ">
-                <h1 class="display-4 mt-0">CITY FOR CITY</h1>
-                <p class="lead">"??????"</p>
+                <h1 class="display-4 p-3">CRIME DATASET</h1>
+                <div class="dropdown">
+                    <button class="btn btn-outline-success border-0 dropdown-toggle shadow-lg w-100 p-3  mt-4 mb-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 100px; width: 500px;">
+                      Pick Your Neighborhood
+                    </button>
+                    <div id="ddlink" class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" id="edge-data" value="" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Edgewater</a>
+                      <a class="dropdown-item" id="hyde-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Hyde Park</a>
+                      <a class="dropdown-item" id="lake-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Lakeview</a>
+                      <a class="dropdown-item" id= "lp-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Lincoln Park</a>
+                      <a class="dropdown-item" id="ls-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Lincoln Square</a>
+                      <a class="dropdown-item" id="logan-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Logan Square</a>
+                      <a class="dropdown-item" id="pilsen-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Pilsen (Lower West Side)</a>
+                      <a class="dropdown-item" id="uptown-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Uptown</a>
+                      <a class="dropdown-item" id="buck-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Bucktown (West Town) </a>
+                      <a class="dropdown-item" id="west-data" href="file:///C:/Users/ulasd/OneDrive/Desktop/Group-Project-1/crimeindex.html">Wicker Park (West Town)</a>
+                    </div>
+                  </div>
+                
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner mb-0">
                         <div class="carousel-item active">
@@ -52,21 +69,23 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <!-- <div class="col-6 mb-2"> -->
-                <a class="nav-link m-1 btn btn-outline-success text-center shadow-lg p-5 rounded mx-auto d-block " href="#" style="width: 245px;">City Comparison</a>
-                <a class="nav-link m-1 btn btn-outline-success text-center shadow-lg p-5 rounded mx-auto d-block" href="C:/Users/ulasd/OneDrive/Desktop/start%20point/crimeindex.html" style="width: 245px;">Crime Rate</a>
-            </div>
-            <div class="row "> 
-                <a class="nav-link m-1 btn btn-outline-success text-center shadow-lg p-5 rounded mx-auto d-block mb-2" href="#" style="width: 245px;">Entertainment</a>
-                <a class="nav-link m-1 btn btn-outline-success text-center shadow-lg p-5 rounded mx-auto d-block mb-2" href="#" style="width: 245px;">People</a>
-            </div>
-            <!-- <div class="col-6 mb-2">
-                <a class="nav-link m-2 w-50 text-success text-center shadow-lg p-5 bg-white rounded mx-auto d-block" href="#">Entertainment</a>
-                <a class="nav-link m-2 w-50 text-success text-center shadow-lg p-5 bg-white rounded mx-auto d-block" href="#">People</a>
-            </div> -->
+             <div class="container text-center mx-auto d-block w-100 shadow-lg p-3  bg-white rounded mt-3" id="push-data">
+                    <table id="crime-display-table" class="table table-bordered table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th># of Crime Type</th>
+                                <th>Type of Crime</th>
+                                <th>Occurance Number</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
         
 

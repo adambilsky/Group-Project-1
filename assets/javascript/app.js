@@ -45,7 +45,21 @@ var CAArray = [
     }
 
 ]
+var crimeDisplayTable = document.getElementById("ddlink");
+var linkNeighborhood = crimeDisplayTable.querySelectorAll("a");
+console.log(linkNeighborhood);
+for (i= 0; i <linkNeighborhood.length; i++) {
+    linkNeighborhood[i].addEventListener("click", registerOutput)
+}
+function registerOutput () {
+    console.log(this);
+}
+
+
+
+
 var LincolnPark = [];
+var crimeData;
 
 $.ajax({
     url: "https://data.cityofchicago.org/resource/6zsd-86xi.json",
@@ -55,7 +69,7 @@ $.ajax({
         "$$app_token": "chp9vzClkoQ3bf0yZLoCpG21u"
     }
 }).done(function (data) {
-    alert("Retrieved " + data.length + " records from the dataset!");
+    // alert("Retrieved " + data.length + " records from the dataset!");
     for (i = 0; i < data.length; i++) {
         if (parseInt(data[i].community_area) === 7) {
             var lpdata = data[i];
@@ -65,10 +79,49 @@ $.ajax({
     }
     console.log(LincolnPark);
 
+    // This for/if loop creates an array primary crime types 
 
-    // else {
-    //     alert("There are no records matching the criteria you have chosen.")
+    var crimeTypes = [];
+    for (i = 0; i < LincolnPark.length; i++) {
+        // var crime = "LincolnPark[i].primary_type";
+        if (crimeTypes.indexOf(LincolnPark[i].primary_type) == -1) {
+            crimeTypes.push(LincolnPark[i].primary_type);
+        }
+    }
+    // for (j = 0; j < LincolnPark.length; j++) {
+
     // }
-    // console.log(data);
+    console.log(crimeTypes);
+    console.log(crimeTypes[0]);
 
-});    
+    // The variable crimeSpec holds the current count of each crime
+    // as the following for/if loop iterates through the results for
+    // a particular neighborhood (Lincoln Park is the test case.
+    // "LincolnPark" will be replaced by a variable when the drop-down
+    // menu is complete.)
+    var crimeSpec = 0;
+    for (c = 0; c < crimeTypes.length; c++) {
+        for (i = 0; i < LincolnPark.length; i++) {
+            if (i = crimeTypes[c]) {
+                crimeSpec++
+            }
+        }
+        // The below console.log will be replaced by a dynamically created table.
+        // Each row will be populated by a complete iteration of the "c" variable
+        // and its temporary count. The id "crime-display-table" does not yet exist.
+        console.log("Total number of crimes of type " + crimeTypes[c] + ": " + crimeSpec);
+        $("#crime-display-table > tbody").append("<tr><td>" + crimeSpec + "</td><td>" + crimeTypes[c] + "</td></tr>");
+
+    }
+
+
+});
+
+
+
+    // Upcoming (1): An event listener on the click/drop-down menu 
+    // to pass the selected neighborhood string (***
+    // or the Community Area value directly ***) through the above loop 
+
+    // Upcoming (2): A dynamic table creation function 
+    // to push the results of a search into a readable format. 
