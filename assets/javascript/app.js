@@ -68,6 +68,7 @@ var CAArray = [
 
 ]
 
+
 $(".neighborhood").on("click", function () {
 
     var neighborhoodArray = [];
