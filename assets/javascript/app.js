@@ -71,7 +71,7 @@ $(".neighborhood").on("click", function () {
     // in each reported neighborhood AND the number of each type committed in 2018.
 
     var crimeTypes = {};
-    var neighborhood = $(this).attr("data-value");
+    var CA = $(this).attr("data-value");
     var neighName = $(this).attr("data-name");
     $.ajax({
         url: "https://data.cityofchicago.org/resource/6zsd-86xi.json",
@@ -83,7 +83,7 @@ $(".neighborhood").on("click", function () {
     }).done(function (data) {
         alert("Retrieved " + data.length + " records from the dataset!");
         for (i = 0; i < data.length; i++) {
-            if (parseInt(data[i].community_area) == neighborhood) {
+            if (parseInt(data[i].community_area) == CA) {
                 var CAdata = data[i];
                 neighborhoodArray.push(CAdata);
             }
@@ -102,9 +102,24 @@ $(".neighborhood").on("click", function () {
             }
             // $("#crime-display-table > tbody").append("<tr><td>") + crimeTypes[] + "</td><td>";
         }
-
+        
+        // Log entire object for a particular neighborhood:  
+        console.log("Following is the neighborhood crime report for " + neighName + ":");
         console.log(crimeTypes);
+        
+        // List the types of crime
+        console.log("Folliwing are all crime types reported out of " + data.length + " records retrieved from " + neighName + ": ");
         console.log(Object.keys(crimeTypes));
+        
+        //Grab one particular crime type and name it by index position 
+        console.log("Following is the first crime type recorded in the list of records returned from " + neighName +": ");
+        console.log(Object.keys(crimeTypes)[0]);
+        
+        //Report one particular type of crime from the neighborhood by name and list the number
+        console.log("Following is the number of Assaults reported in " + neighName + ": " + crimeTypes.ASSAULT);
+        console.log("Following is the number of Motor Vehicle Thefts reported in " + neighName + ": " + crimeTypes.MOTOR_VEHICLE_THEFT);
+        console.log("Following is the number of Batteries reported in " + neighName + ": " + crimeTypes.BATTERY);
+
         database.ref().push({
             neighName,
             crimeTypes
@@ -112,6 +127,8 @@ $(".neighborhood").on("click", function () {
     });
 });
 
-
+// database.ref().on("child_added", function (childSnapshot) {
+//     console.log(childSnapshot.val());
+// });
 // Upcoming (2): A dynamic table creation function 
 // to push the results of a search into a readable format.
