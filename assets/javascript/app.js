@@ -64,13 +64,15 @@ var CAArray = [
 
 $(".neighborhood").on("click", function () {
 
-    // An array of neighborhoods by name
+    // An array of neighborhood crime report objects 
+    // to be dynamically filled by AJAX request
     var neighborhoodArray = [];
     
     // A dynamically-created object holding the types of crime 
     // in each reported neighborhood AND the number of each type committed in 2018.
 
     var crimeTypes = {};
+    var crimeNames = [];
     var CA = $(this).attr("data-value");
     var neighName = $(this).attr("data-name");
     $.ajax({
@@ -93,7 +95,7 @@ $(".neighborhood").on("click", function () {
         // This for/if loop populates an object of key-value pairs of primary crime types 
 
         for (i = 0; i < neighborhoodArray.length; i++) {
-
+            var crimeName = "";
             if (Object.keys(crimeTypes).indexOf(neighborhoodArray[i].primary_type) < 0) {
                 crimeTypes[neighborhoodArray[i].primary_type] = 1;
             }
@@ -102,7 +104,6 @@ $(".neighborhood").on("click", function () {
             }
             // $("#crime-display-table > tbody").append("<tr><td>") + crimeTypes[] + "</td><td>";
         }
-        
         // Log entire object for a particular neighborhood:  
         console.log("Following is the neighborhood crime report for " + neighName + ":");
         console.log(crimeTypes);
@@ -117,8 +118,10 @@ $(".neighborhood").on("click", function () {
         
         //Report one particular type of crime from the neighborhood by name and list the number
         console.log("Following is the number of Assaults reported in " + neighName + ": " + crimeTypes.ASSAULT);
-        console.log("Following is the number of Motor Vehicle Thefts reported in " + neighName + ": " + crimeTypes.MOTOR_VEHICLE_THEFT);
         console.log("Following is the number of Batteries reported in " + neighName + ": " + crimeTypes.BATTERY);
+        
+        //The following line fails because of the space between words in the oject key. We have to (I think) figure out how to trim this
+        console.log("Following is the number of Motor Vehicle Thefts reported in " + neighName + ": " + crimeTypes.MOTOR_VEHICLE_THEFT);
 
         database.ref().push({
             neighName,
