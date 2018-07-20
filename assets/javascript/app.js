@@ -16,47 +16,26 @@ var database = firebase.database();
 // An array of objects, each containing one of 
 // the 10 neighborhood names and corresponding Community Area #
 var CAArray = [
-    {
-        NH: "Edgewater",
-        CA: 77
+    {"Edgewater": 54873
     },
-    {
-        NH: "Hyde Park",
-        CA: 41
+    {"Hyde Park": 26893
     },
-    {
-        NH: "Lakeview",
-        CA: 6
+    {"Lakeview": 98212
     },
-    {
-        NH: "Lincoln Park",
-        CA: 7
+    {"Lincoln Park": 66959
     },
-    {
-        NH: "Lincoln Square",
-        CA: 4
+    {"Lincoln Square": 40761
     },
-    {
-        NH: "Logan Square",
-        CA: 22
+    {"Logan Square": 73702
     },
-    {
-        NH: "Pilsen (Lower West Side)",
-        CA: 31
+    {"Pilsen (Lower West Side)": 34410
     },
-    {
-        NH: "Uptown",
-        CA: 3
+    {"Uptown": 55137
     },
-    {
-        NH: "Bucktown (West Town)",
-        CA: 24
+    {"Bucktown (West Town)": 86429
     },
-    {
-        NH: "Wicker Park (West Town)",
-        CA: 24
+    {"Wicker Park (West Town)": 86429
     }
-
 ]
 
 // An event listener on the click/drop-down menu 
@@ -83,7 +62,6 @@ $(".neighborhood").on("click", function () {
             "$$app_token": "chp9vzClkoQ3bf0yZLoCpG21u"
         }
     }).done(function (data) {
-        alert("Retrieved " + data.length + " records from the dataset!");
         for (i = 0; i < data.length; i++) {
             if (parseInt(data[i].community_area) == CA) {
                 var CAdata = data[i];
@@ -119,8 +97,8 @@ $(".neighborhood").on("click", function () {
         console.log("Following is the number of Assaults reported in " + neighName + ": " + crimeTypes.ASSAULT);
         console.log("Following is the number of Batteries reported in " + neighName + ": " + crimeTypes.BATTERY);
         
-        //The following line fails because of the space between words in the oject key. We have to (I think) figure out how to trim this
         console.log("Following is the number of Motor Vehicle Thefts reported in " + neighName + ": " + crimeTypes["MOTOR VEHICLE THEFT"]);
+       
         // console.log(Object.values(crimeTypes));
         console.log(Object.entries(crimeTypes));
         
@@ -138,11 +116,12 @@ $(".neighborhood").on("click", function () {
             }    
         }
 
+        console.log(CAArray)
+
         console.log(maxKey + ": " + max + "/" + data.length);
         var crimeRate = Math.round((max/data.length)*100).toFixed(0);
-        console.log(crimeRate);
         console.log("Homicides in " + neighName + ": " + crimeTypes["HOMICIDE"]);
-        console.log("The most frequent crime in " + neighName + " is " + maxKey + ", which occurred in " + crimeRate + "% of all crimes.");
+        console.log("The most frequent crime in " + neighName + " is " + maxKey + ", which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018.");
         $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" +maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + crimeTypes["HOMICIDE"] + "</td></tr>");
 
         // database.ref().push({
