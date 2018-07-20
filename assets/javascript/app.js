@@ -76,6 +76,7 @@ $(".neighborhood").on("click", function () {
     var CA = $(this).attr("data-value");
     var neighName = $(this).attr("data-name");
 
+    // The following takes the latitude and longitude from the CDP and zooms in on the map
     var lat = $(this).attr("lat"); 
     var long = $(this).attr("long"); 
 
@@ -189,9 +190,5 @@ $(".neighborhood").on("click", function () {
 
 // database.ref().on("child_added", function (childSnapshot) {
 //     console.log(childSnapshot.val());
-// });
-// Upcoming (2): A dynamic table creation function 
-// to push the results of a search into a readable format.
-
 
 
