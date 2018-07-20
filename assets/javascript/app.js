@@ -106,9 +106,17 @@ $(".neighborhood").on("click", function () {
             console.log(maxKey + ": " + max + "/" + data.length);
             var crimeRate = Math.round((max/data.length)*100).toFixed(0);
             var crimePerCapita = ((max/population)*100).toFixed(2);
-            console.log("Homicides in " + neighName + ": " + crimeTypes["HOMICIDE"]);
+            var homicide;
+            if (typeof(crimeTypes["HOMICIDE"])=="undefined") {
+                homicide = 0;
+            }
+            else {
+                homicide = parseInt(crimeTypes["HOMICIDE"]);
+            } 
+
+            console.log("Homicides in " + neighName + ": " + homicide);
             console.log;
-            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + crimeTypes["HOMICIDE"] + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>");
+            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>");
         }
         maxCrime();
         
