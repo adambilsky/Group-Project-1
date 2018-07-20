@@ -13,8 +13,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// An array of objects, each containing one of 
-// the 10 neighborhood names and corresponding Community Area #
+// An objects of key-value pairs, each containing one of 
+// the 10 neighborhood names and corresponding 2017 population
 var CAArray = {
     "Edgewater": 54873,
     "Hyde Park": 26893,
@@ -22,10 +22,10 @@ var CAArray = {
     "Lincoln Park": 66959,
     "Lincoln Square": 40761,
     "Logan Square": 73702,
-    "Pilsen (Lower West Side)": 34410,
+    "Pilsen": 34410,
     "Uptown": 55137,
-    "Bucktown (West Town)": 86429,
-    "Wicker Park (West Town)": 86429
+    "Bucktown": 86429,
+    "Wicker Park": 86429
     }
 
 // An event listener on the click/drop-down menu 
@@ -77,13 +77,7 @@ $(".neighborhood").on("click", function () {
         console.log("Following are all crime types reported out of " + data.length + " records retrieved from " + neighName + ": ");
         console.log(Object.keys(crimeTypes));
 
-        //Grab one particular crime type and name it by index position 
-        console.log("Following is the first crime type recorded in the list of records returned from " + neighName +": ");
-        console.log(Object.keys(crimeTypes)[0]);
-        
         //Report one particular type of crime from the neighborhood by name and list the number
-        console.log("Following is the number of Assaults reported in " + neighName + ": " + crimeTypes.ASSAULT);
-        console.log("Following is the number of Batteries reported in " + neighName + ": " + crimeTypes.BATTERY);
         console.log("Following is the number of Motor Vehicle Thefts reported in " + neighName + ": " + crimeTypes["MOTOR VEHICLE THEFT"]);
        
         console.log(Object.entries(crimeTypes));
@@ -98,12 +92,12 @@ $(".neighborhood").on("click", function () {
             var crimeArr = [];
 
             for(var key in crimeTypes) {
-                if(crimeTypes[key] > max){
+                if(crimeTypes[key]> max){
                     max = crimeTypes[key];
                     maxKey = key;
-                }    
+                }
             }
-            console.log(maxKey + ": " + max + "/" + data.length);
+            
             var crimeRate = Math.round((max/data.length)*100).toFixed(0);
             var crimePerCapita = ((max/population)*100).toFixed(2);
             var homicide;
@@ -112,18 +106,30 @@ $(".neighborhood").on("click", function () {
             }
             else {
                 homicide = parseInt(crimeTypes["HOMICIDE"]);
-            } 
+            }
+            
+            var battery = parseInt(crimeTypes["BATTERY"]);
+            var sexAss = parseInt(crimeTypes["CRIM SEXUAL ASSAULT"]);
+            var sexOff = parseInt(crimeTypes["SEX OFFENSE"]);
+            var robbery = parseInt(crimeTypes["ROBBERY"]);
+            var violCrimeRate = (((battery + sexAss + sexOff + robbery + homicide)/population)*100).toFixed(2);
+            if (violCrimeRate<1.00) {
+                violCrimeRate = " less than 1%"
+            }
 
-            console.log("Homicides in " + neighName + ": " + homicide);
-            console.log;
-            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>");
+
+
+            // The following prints a report to the document, which includes the name, population,
+            // most frequent type of crime (generally theft), # of homicides, and a summary.
+            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault other sex offenses, and homicide) was " + violCrimeRate + " per capita." + "</td></tr>");
+            
         }
         maxCrime();
         
-        // Goal: to compare the neighborhood crime data to population size
+        // *** Goal: to compare the neighborhood crime data to population size
         // in order to create a more user-oriented neighborhood "snapshot"
-        console.log(CAArray)
-        console.log("Population of " + neighName + ": " + CAArray[neighName]);
+
+        // Goal: to create an index of the more violent/disturbing (non-homicide) crimes 
 
         // database.ref().push({
         //     neighName,
