@@ -22,8 +22,4 @@
       console.log(data);
 
     }});    
-    
-    
-    
-    
-    
+

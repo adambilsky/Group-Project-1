@@ -75,6 +75,42 @@ $(".neighborhood").on("click", function () {
     var crimeNames = [];
     var CA = $(this).attr("data-value");
     var neighName = $(this).attr("data-name");
+
+    // The following takes the latitude and longitude from the CDP and zooms in on the map
+    var lat = $(this).attr("lat"); 
+    var long = $(this).attr("long"); 
+
+    // var coordsStr = $(this).parents().find(".coords").html();
+    // var coords = coordsStr.split(",");
+    var point = new google.maps.LatLng(lat, long);
+    map.setCenter(point);
+    map.setZoom(15);
+    console.log(this.lat);
+
+    // "location": {
+    //     "type": "Point",
+    //     "coordinates": [
+    //     -87.695151501,
+    //     41.7983303
+    //     ]
+    //     },
+    // "primary_type": "ASSAULT",
+
+    // function initMap() {
+    //     var myLatLng = {lat: -25.363, lng: 131.044};
+
+    //     var map = new google.maps.Map(document.getElementById('map'), {
+    //       zoom: 4,
+    //       center: myLatLng
+    //     });
+
+    //     var marker = new google.maps.Marker({
+    //       position: myLatLng,
+    //       map: map,
+    //       title: "primary_type"
+    //     });
+    
+    
     $.ajax({
         url: "https://data.cityofchicago.org/resource/6zsd-86xi.json?community_area=" + CA + "&year=2018",
         type: "GET",
@@ -154,6 +190,5 @@ $(".neighborhood").on("click", function () {
 
 // database.ref().on("child_added", function (childSnapshot) {
 //     console.log(childSnapshot.val());
-// });
-// Upcoming (2): A dynamic table creation function 
-// to push the results of a search into a readable format.
+
+
