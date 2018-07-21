@@ -45,7 +45,10 @@ $(".neighborhood").on("click", function () {
     var CA = $(this).attr("data-value");
     var neighName = $(this).attr("data-name");
 
+
     var markers = [];
+    // The following takes the latitude and longitude from the CDP and zooms in on the map
+
     var lat = $(this).attr("lat"); 
     var long = $(this).attr("long"); 
 
