@@ -10,3 +10,22 @@ h4 {
 /* #jumbo-tron {
     background-color: bisque;
 } */
+
+#map {
+    height: 80%;
+  }
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+.Rbutton {
+  width: 150px;
+  text-align: center;
+  margin:0 auto;
+}
+#submission {
+    text-align: center;
+    }
