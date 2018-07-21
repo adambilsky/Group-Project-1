@@ -16,18 +16,6 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/style.css">
 
-    <style>
-    
-            #map {
-              height: 80%;
-            }
-            html, body {
-              height: 100%;
-              margin: 0;
-              padding: 0;
-            }
-          </style>
-
     <title>Crime Dataset</title>
 </head>
 
@@ -44,16 +32,16 @@
                     </button>
 
                        <div id="ddlink" class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item neighborhood" id="bridge-data" data-name="Bridgeport" data-value="60" lat="41.8365" long="-87.6495">Bridgeport</a>
                         <a class="dropdown-item neighborhood" id="edge-data" data-name="Edgewater" data-value="77" lat="41.9872" long="-87.6612">Edgewater</a>
                         <a class="dropdown-item neighborhood" id="hyde-data" data-name="Hyde Park" data-value="41"lat="41.7943" long="-87.5907">Hyde Park</a>
                         <a class="dropdown-item neighborhood" id="lake-data" data-name="Lakeview" data-value="6" lat="41.9436" long="-87.6584" >Lakeview</a>
                         <a class="dropdown-item neighborhood" id= "lp-data" data-name="Lincoln Park" data-value="7" lat="41.9214" long="-87.6513" >Lincoln Park</a>
                         <a class="dropdown-item neighborhood" id="ls-data" data-name="Lincoln Square" data-value="4" lat="41.9699" long="-87.6887">Lincoln Square</a>
-                        <a class="dropdown-item neighborhood" id="logan-data" data-name="Logan Square" data-value="22" lat="41.9231" long="-87.7093"Logan Square</a>
+                        <a class="dropdown-item neighborhood" id="logan-data" data-name="Logan Square" data-value="22" lat="41.9231" long="-87.7093">Logan Square</a>
                         <a class="dropdown-item neighborhood" id="pilsen-data" data-name="Pilsen" data-value="31" lat="41.8562" long="-87.6563">Pilsen (Lower West Side)</a>
-                        <a class="dropdown-item neighborhood" id="uptown-data" data-name="Uptown" data-value="3" lat="41.9665" long="-87.6533"Uptown</a>
-                        <a class="dropdown-item neighborhood" id="buck-data" data-name="Bucktown" data-value="24" lat="41.9227" long="-87.6803">Bucktown (West Town) </a>
-                        <a class="dropdown-item neighborhood" id="west-data" data-name="Wicker Park" data-value="24" lat="41.9088" long="-87.6796">Wicker Park (West Town)</a>
+                        <a class="dropdown-item neighborhood" id="uptown-data" data-name="Uptown" data-value="3" lat="41.9665" long="-87.6533">Uptown</a>
+                        <a class="dropdown-item neighborhood" id="west-data" data-name="West Town" data-value="24" lat="41.9227" long="-87.6803">West Town (Bucktown/Wicker Park) </a>                        
                       </div>
                     </div>
                   </div>
@@ -104,58 +92,7 @@
 
                             </tr>
                         </tbody>
-                    </table>
-                </div>
-        </div>
-        
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner mb-0">
-                        <div class="carousel-item active">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/20151021-DSC_0470-Pano.jpg" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/cm120310_midtown_sunrise_pano_selig_4661_artnight.jpg"
-                                alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/fodder120137.jpg" alt="Third slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/Free-Panoramic-City-Wallpaper.jpg"
-                                alt="Fourth slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/San-Diego-Panorama.jpg" alt="Fifth slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/Stratcon-washington-dc.jpg" alt="Sixth slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="mx-auto d-block w-100 shadow-lg p-3 mb-5 bg-white rounded" src="assets/images/wallpaper-5760x1200-chicago-skyline-panorama-dvdbash-wordpress.jpg"
-                                alt="Seventh slide">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-             <div class="container text-center mx-auto d-block w-100 shadow-lg p-3  bg-white rounded mt-3" id="push-data">
-                    <table id="crime-display-table" class="table table-bordered table-responsive-md">
-                        <thead>
-                            <tr>
-                                <th>Neighborhood</th>
-                                <th>Most Frequent Crime</th>
-                                <th>Frequency (%)</th>
-                                <th>Homicides (#)</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-
-                            </tr>
-                        </tbody>
-                    </table>
-
+                    </table>        
                 
                     <div id="map"></div>
                     <script>
@@ -179,6 +116,10 @@
         
 
     </div>
+    <br>
+    <p id="submission"><input class= "Rbutton" type="button" value="Start Over" onClick="window.location.href=window.location.href">
+    <br>
+
     <div class="card mx-auto" style="width: 1140px;" >
         <div class="card-header text-center text-white-50 bg-dark rounded-0" >Designed By MAU Inc.</div>
           
