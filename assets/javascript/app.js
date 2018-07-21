@@ -16,6 +16,7 @@ var database = firebase.database();
 // An objects of key-value pairs, each containing one of 
 // the 10 neighborhood names and corresponding 2017 population
 var CAArray = {
+    "Bridgeport":33878,
     "Edgewater": 54873,
     "Hyde Park": 26893,
     "Lakeview": 98212,
@@ -24,16 +25,14 @@ var CAArray = {
     "Logan Square": 73702,
     "Pilsen": 34410,
     "Uptown": 55137,
-    "Bucktown": 86429,
-    "Wicker Park": 86429
+    "West Town": 86429,
     }
 
 // An event listener on the click/drop-down menu 
 // to pass the Community Area value through the API 
 
 $(".neighborhood").on("click", function () {
-    $(".carousel-inner").hide();
-
+    $(".carousel-inner").hide(); 
     // An array of neighborhood crime report objects 
     // to be dynamically filled by AJAX request
     var neighborhoodArray = [];
@@ -44,11 +43,24 @@ $(".neighborhood").on("click", function () {
     var crimeTypes = {};
     var CA = $(this).attr("data-value");
     var neighName = $(this).attr("data-name");
+
+
+    var markers = [];
+    // The following takes the latitude and longitude from the CDP and zooms in on the map
+
+    var lat = $(this).attr("lat"); 
+    var long = $(this).attr("long"); 
+
+    var point = new google.maps.LatLng(lat, long);
+    map.setCenter(point);
+    map.setZoom(15);
+    //marker.setMap(null); //clears markers
+    
     $.ajax({
         url: "https://data.cityofchicago.org/resource/6zsd-86xi.json?community_area=" + CA + "&year=2018",
         type: "GET",
         data: {
-            "$limit": 50000,
+            "$limit": 20000,
             "$$app_token": "chp9vzClkoQ3bf0yZLoCpG21u"
         }
     }).done(function (data) {
@@ -122,8 +134,41 @@ $(".neighborhood").on("click", function () {
 
             // The following prints a report to the document, which includes the name, population,
             // most frequent type of crime (generally theft), # of homicides, and a summary.
+
             $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault and other sex offenses, and homicide) was approximately " + violCrimeRate + " per capita." + "</td></tr>");
-            
+          
+            for (var i = 0; i < neighborhoodArray.length; i++) {
+                if (neighborhoodArray[i].primary_type == maxKey ) {
+                    var pos = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+
+                    markers[i] = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        description: neighborhoodArray[i].primary_type,
+                        title: maxKey,
+                        id: i
+                    });
+                }
+                else if (neighborhoodArray[i].primary_type == "HOMICIDE"){
+                    markers[i] = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        description: neighborhoodArray[i].primary_type,
+                        title: maxKey,
+                        icon: 'assets/images/bluemapicon.png',
+                        id: i
+                    });
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: neighborhoodArray[i].primary_type
+                    });
+
+                    infowindow.open(map, markers[i]);
+                    google.maps.event.addListener(markers[i], 'click', function () {
+                        alert(markers[this.id].description)
+                    });
+                }
+            }
         }
         maxCrime();
         
