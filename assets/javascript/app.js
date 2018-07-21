@@ -31,7 +31,6 @@ var CAArray = {
 // An event listener on the click/drop-down menu 
 // to pass the Community Area value through the API 
 
-
 $(".neighborhood").on("click", function () {
     $(".carousel-inner").hide(); 
     // An array of neighborhood crime report objects 
@@ -135,9 +134,9 @@ $(".neighborhood").on("click", function () {
 
             // The following prints a report to the document, which includes the name, population,
             // most frequent type of crime (generally theft), # of homicides, and a summary.
-            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault other sex offenses, and homicide) was " + violCrimeRate + " per capita." + "</td></tr>");
 
-                
+            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault and other sex offenses, and homicide) was approximately " + violCrimeRate + " per capita." + "</td></tr>");
+          
             for (var i = 0; i < neighborhoodArray.length; i++) {
                 if (neighborhoodArray[i].primary_type == maxKey ) {
                     var pos = new google.maps.LatLng(data[i].latitude, data[i].longitude);
@@ -170,7 +169,6 @@ $(".neighborhood").on("click", function () {
                     });
                 }
             }
-
         }
         maxCrime();
         
@@ -186,5 +184,6 @@ $(".neighborhood").on("click", function () {
     });
 });
 
-
-    
+// database.ref().on("child_added", function (childSnapshot) {
+//     console.log(childSnapshot.val());
+// });
