@@ -131,9 +131,9 @@ $(".neighborhood").on("click", function () {
             }
 
 
-
             // The following prints a report to the document, which includes the name, population,
             // most frequent type of crime (generally theft), # of homicides, and a summary.
+
 
             $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault and other sex offenses, and homicide) was approximately " + violCrimeRate + " per capita." + "</td></tr>");
           
