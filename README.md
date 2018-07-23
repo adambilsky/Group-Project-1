@@ -13,3 +13,6 @@ Future versions of this app will include:
 - Images that relate more directly to each selected neighborhood;
 - Data representation of all 77 Chicago neighborhoods;
 - Comparison data for other aspects of neighborhood life, including food, transit, and parks.
+
+
+https://adambilsky.github.io/Group-Project-1/
