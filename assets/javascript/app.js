@@ -135,7 +135,7 @@ $(".neighborhood").on("click", function () {
             // most frequent type of crime (generally theft), # of homicides, and a summary.
 
 
-            $("#crime-display-table > tbody").append("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault and other sex offenses, and homicide) was approximately " + violCrimeRate + " per capita." + "</td></tr>");
+            $("#crime-display-table > tbody").prepend("<tr><td>" + neighName + "</td><td>" + population + "</td><td>" + maxKey + "</td><td>" + crimeRate + "</td><td style = 'color: red'>" + homicide + "</td></tr>" + "<tr><td>" + "The most frequent crime in " + neighName + " is " + maxKey + ", which occurs at a rate of " + crimePerCapita + "% per capita, and which comprised " + crimeRate + "% (" + max + "/" + data.length + ") of all crimes in 2018." + "</td></tr>" + "<tr><td>" + "The rate of violent crime (including robbery, battery, sexual assault and other sex offenses, and homicide) was approximately " + violCrimeRate + " per capita." + "</td></tr>");
           
             for (var i = 0; i < neighborhoodArray.length; i++) {
                 if (neighborhoodArray[i].primary_type == maxKey ) {
